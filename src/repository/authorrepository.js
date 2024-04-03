@@ -3,8 +3,18 @@ const Author=require('../models/author');
 class AuthorRepository{
     async createauthor(data){
         try {
-            const book=await Author.create(data);
-            return book;
+            const author=await Author.create(data);
+            return author;
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    async authorassiociationwithbooks(data){
+        try {console.log(data);
+            const author=await Author.findById(data);
+             console.log(author);
+            return author;
         } catch (error) {
             console.log(error);
         }

@@ -2,7 +2,6 @@ const {AuthorRepository,BookRepository}=require('../repository/index');
 class AuthorService{
     constructor(){
         this.authorRepository=new AuthorRepository();
-        this.bookRepository=new BookRepository();
     }
     async create(data){
         try {

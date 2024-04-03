@@ -8,18 +8,15 @@ class BookService{
     }
     async create(data){
         try {
-            let authorId=0;
-            if(data.Author){
-                const author = await this.authorRepository.createauthor({
-                    Name:data.Author
-                });
-                authorId=author._id;
-                console.log('Author created:',author);
-            }
-            const book=await this.bookRepository.createbook({Title:data.Title,Id:data.Id});
-           
-            book.Author=authorId;
-            await book.save();            
+            const author=await this.authorRepository.createauthor({Name:data.author});
+            console.log(author)
+
+            const book=await this.bookRepository.createbook({
+                Title:data.Title,
+                author:author._id,
+            });  
+            await author.books.push(book);
+            await author.save();
             return book;
 
         } catch (error) {

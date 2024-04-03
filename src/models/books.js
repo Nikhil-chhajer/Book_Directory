@@ -5,14 +5,17 @@ const BookSchema= new mongoose.Schema({
         type:String,
         required:true,
     },
-    Author:{
+    author:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Author'
     },
-    Id:{
+    AuthorId:{
         type:String,
-        required:true,
-    }
+    },
+    // Id:{
+    //     type:String,
+    //     required:true,
+    // }
     
 
   },{timestamps:true});

@@ -15,5 +15,17 @@ class AuthorService{
         }
 
     }
+    async findauthor(data){
+        try {
+            const author=await this.authorRepository.authorassiociationwithbooks(data);
+            
+            return author;
+
+        } catch (error) {
+            console.log("something wrong in the Service layer");
+            throw { error };
+        }
+
+    }
 }
 module.exports=AuthorService;

@@ -4,8 +4,9 @@ const AuthorSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    AuthorId:{
-        typr:String,
+    authorId:{
+        type:String,
+    
 
     },
     Nationality:{

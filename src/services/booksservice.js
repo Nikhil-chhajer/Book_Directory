@@ -8,16 +8,30 @@ class BookService{
     }
     async create(data){
         try {
-            const author=await this.authorRepository.createauthor({Name:data.author});
-            console.log(author)
-
+            const validate=await this.authorRepository.authorassiociationwithbooks(data.authorId);
+            if(validate){
+                const book=await this.bookRepository.createbook({
+                    Title:data.Title,
+                    author:validate._id,
+                    authorId:data.authorId
+                });  
+                await validate.books.push(book);
+                await validate.save();
+                return book;
+            }
+            const author=await this.authorRepository.createauthor({
+                Name:data.author, 
+                authorId:data.authorId
+            });  
             const book=await this.bookRepository.createbook({
                 Title:data.Title,
                 author:author._id,
+                authorId:data.authorId
             });  
             await author.books.push(book);
             await author.save();
             return book;
+
 
         } catch (error) {
             console.log("something wrong in the Service layer");

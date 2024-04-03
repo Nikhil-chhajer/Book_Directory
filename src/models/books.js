@@ -9,13 +9,13 @@ const BookSchema= new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Author'
     },
-    AuthorId:{
+    authorId:{
         type:String,
     },
-    // Id:{
-    //     type:String,
-    //     required:true,
-    // }
+    bookId:{
+        type:String,
+
+    }
     
 
   },{timestamps:true});

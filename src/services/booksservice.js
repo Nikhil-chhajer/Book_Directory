@@ -10,15 +10,17 @@ class BookService{
         try {
             const validate=await this.authorRepository.authorassiociationwithbooks(data.authorId);
             if(validate){
+               
                 const book=await this.bookRepository.createbook({
                     Title:data.Title,
                     author:validate._id,
                     authorId:data.authorId
                 });  
-
+                    if(book!=null){
                     await validate.books.push(book);
                     await validate.save();
                     return book;
+                    }
               
             }
             const author=await this.authorRepository.createauthor({
@@ -31,10 +33,11 @@ class BookService{
                 authorId:data.authorId,
                 bookId:data.bookId
             });  
+            if(book!=null){
             await author.books.push(book);
             await author.save();
             return book;
-
+            }
 
         } catch (error) {
             console.log("something wrong in the Service layer");

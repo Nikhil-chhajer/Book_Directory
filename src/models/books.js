@@ -4,17 +4,19 @@ const BookSchema= new mongoose.Schema({
     Title:{
         type:String,
         required:true,
+        unique:true,
+        index: true,
     },
     author:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Author'
+        ref:'Author',
     },
     authorId:{
         type:String,
+        required:true,
     },
     bookId:{
         type:String,
-
     }
     
 

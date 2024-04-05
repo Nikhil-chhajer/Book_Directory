@@ -6,8 +6,8 @@ const AuthorSchema=new mongoose.Schema({
     },
     authorId:{
         type:String,
-    
-
+        required:true,
+        unique:true
     },
     Nationality:{
         type:String,

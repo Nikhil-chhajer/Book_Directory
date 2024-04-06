@@ -83,6 +83,25 @@ const deletebook=async (req,res)=>{
     }
     
 }
+const findAll=async(req,res)=>{
+    try {
+        const book=await bookService.findAllbook(req.body);
+        return res.status(201).json({
+            data :book,
+            success:true,
+            messgage:'Sucessfully got the books',
+            err:{}
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data:{},
+            success:false,
+            message:'Not able to find a book',
+            err:error
+        })
+    }
+}
 module.exports={
-    create,update,deletebook,findbook
+    create,update,deletebook,findbook,findAll
 }

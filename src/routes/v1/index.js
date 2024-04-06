@@ -5,4 +5,6 @@ router.post('/book',bookcontroller.create);
 router.patch('/update',bookcontroller.update);
 router.delete('/delete',bookcontroller.deletebook);
 router.get('/id',bookcontroller.findbook);
+router.get('/search',bookcontroller.findAll);
+
 module.exports=router;

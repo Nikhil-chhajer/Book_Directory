@@ -13,12 +13,11 @@ class BookRepository{
     }
     async updatebook(data){
         try {
-            console.log(data);
             const book=await Books.findOne({
                 bookId:data.bookId,
             });
             const { author, ...dataWithoutAuthor } = data;
-            await book.updateOne(dataWithoutAuthor);
+            await Books.updateOne(dataWithoutAuthor);
             return book;
         } catch (error) {
             console.log(error);       
@@ -35,13 +34,27 @@ class BookRepository{
         }
 
     }
+    async findAll(data){
+        try {
+         
+            const books=await Books.find({
+                Title:{
+                    $regex:data,
+                    $options: 'i'
+                 }
+            });
+            return books;
+        } catch (error) {
+            console.log(error);     
+        }
+    }
     async delete(bookId,authorId){
        try {
         const book=await Books.findOne({
             bookId:bookId,
         });
         if(book){
-        await book.deleteOne(book);
+        await Books.deleteOne(book);
         const author=await Author.findOne({authorId:authorId});
         await author.books.pop(book);
         await author.save();

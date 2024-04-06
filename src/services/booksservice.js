@@ -79,5 +79,16 @@ class BookService{
         
        }
     }
+    async findAllbook(data){
+        try {
+            const books=await this.bookRepository.findAll(data.Title);
+            return books;
+
+        } catch (error) {
+            console.log("something wrong in the Service layer");
+            throw { error };
+        }
+
+    }
 }
 module.exports=BookService;

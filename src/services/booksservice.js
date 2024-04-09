@@ -71,7 +71,7 @@ class BookService{
     }
     async findbook(data){
        try {
-        const book =await this.bookRepository.find(data.bookId);
+        const book =await this.bookRepository.find(data);
         return book;
        } catch (error) {
         console.log("something wrong in the Service layer");

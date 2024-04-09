@@ -25,8 +25,9 @@ class BookRepository{
     }
     async find(data){
         try {
+     
             const book=await Books.findOne({
-                bookId:data.bookId,
+                bookId:data,
             });
             return book;
         } catch (error) {

@@ -44,7 +44,7 @@ const update=async (req,res)=>{
 
 const findbook=async (req,res)=>{
     try {
-        const book=await bookService.findbook(req.body);
+        const book=await bookService.findbook(req.params.id);
         return res.status(201).json({
             data :book,
             success:true,

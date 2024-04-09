@@ -2,8 +2,8 @@ const {ReviewService}=require('../services/index.js');
 const reviewService=new ReviewService();
 const create=async(req,res)=>{
     try {
-       
-        const review=await reviewService.create(req.body);
+        const bearerToken = req.headers.authorization;
+        const review=await reviewService.create(req.body,bearerToken);
         return res.status(201).json({
             data :review,
             success:true,

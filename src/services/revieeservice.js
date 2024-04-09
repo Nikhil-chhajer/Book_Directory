@@ -7,7 +7,7 @@ class ReviewService{
         this.reviewRepository=new ReviewRepository();
         this.bookRepository=new BookRepository();
     }
-    async create(data){
+    async create(data,bearerToken){
         try {
         const books=await this.bookRepository.find(data.bookId);
         const users=await axios.get(`http://localhost:3001/api/v1/${data.userId}`);
@@ -16,6 +16,20 @@ class ReviewService{
                   user:users.data.data,
                   text:data.text
            });
+           const reviewCreationInUser = await axios.post(`http://localhost:3001/api/v1/reviewcreate`, {
+            userId: data.userId,
+            reviewId: review._id,},
+            {
+                headers: {
+                    authorization: bearerToken
+                }
+        });
+
+       
+    
+          
+           await books.reviews.push(review);
+           books.save();
         
         
            return review;

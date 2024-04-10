@@ -17,13 +17,18 @@ const BookSchema = new mongoose.Schema({
     },
     bookId: {
         type: String,
+        required:true
     },
     reviews: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Review',
         }
-    ]
+    ],
+    averagerating:{
+        type:Number,
+        default:0
+    }
 
 
 

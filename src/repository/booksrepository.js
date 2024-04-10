@@ -29,6 +29,7 @@ class BookRepository{
             const book=await Books.findOne({
                 bookId:data,
             });
+        
             return book;
         } catch (error) {
             console.log(error);   

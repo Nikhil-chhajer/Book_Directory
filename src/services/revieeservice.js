@@ -10,11 +10,15 @@ class ReviewService{
     async create(data,bearerToken){
         try {
         const books=await this.bookRepository.find(data.bookId);
+        await books.populate('reviews');
+        console.log(books);
+
         const users=await axios.get(`http://localhost:3001/api/v1/${data.userId}`);
            const review=await this.reviewRepository.createReview({
                   book:books._id,
                   user:users.data.data,
-                  text:data.text
+                  text:data.text,
+                  rating:data.rating
            });
            const reviewCreationInUser = await axios.post(`http://localhost:3001/api/v1/reviewcreate`, {
             userId: data.userId,
@@ -25,13 +29,17 @@ class ReviewService{
                 }
         });
 
-       
-    
-          
-           await books.reviews.push(review);
-           books.save();
         
-        
+        await books.reviews.push(review);
+        let totalRating = 0;
+        for(let i=0;i<books.reviews.length;i++){
+            console.log(books.reviews[i].rating);
+            totalRating += books.reviews[i].rating;
+        }      
+        const averageRating = totalRating / books.reviews.length;
+
+        books.averagerating=averageRating;
+        await books.save();
            return review;
             
 
